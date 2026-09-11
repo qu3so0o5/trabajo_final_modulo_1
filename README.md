@@ -1,107 +1,150 @@
-<div align="center">SISTEMA DE INVENTARIO
+<div align="center"><img src="https://capsule-render.vercel.app/api?type=waving&color=0:8A2BE2,50:B84DFF,100:00D9FF&height=220&section=header&text=SISTEMA%20DE%20INVENTARIO&fontSize=42&fontColor=FFFFFF&fontAlignY=42&animation=twinkling&desc=Gestión%20de%20productos%20desde%20la%20terminal&descSize=16&descAlignY=62&descColor=E6E6FA"/><br><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=B84DFF&center=true&vCenter=true&width=700&lines=Python+%7C+CLI+%7C+CSV;Gestión+de+productos+y+stock;Registro+de+ventas;Construido+desde+cero" alt="Typing SVG"/><br><br>
 
-Sistema de gestión de productos desde la terminal
+<img src="https://img.shields.io/badge/Python-3.x-8A2BE2?style=for-the-badge&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSV-Storage-00BFFF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/CLI-Terminal-B84DFF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Status-En%20desarrollo-FF69B4?style=for-the-badge"/></div><br>---
 
-Un proyecto de línea de comandos desarrollado en Python para administrar productos, controlar stock y registrar ventas utilizando archivos CSV como almacenamiento.
+<div align="center">Una aplicación de inventario construida desde cero con Python
 
-<br>"Python" (https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
-"CSV" (https://img.shields.io/badge/Storage-CSV-6B7280?style=for-the-badge)
-"CLI" (https://img.shields.io/badge/Interface-CLI-8B5CF6?style=for-the-badge)
-"Status" (https://img.shields.io/badge/Status-In%20Development-F59E0B?style=for-the-badge)
+Sistema de línea de comandos para crear, consultar, modificar y eliminar productos, controlar existencias y registrar ventas utilizando archivos CSV como almacenamiento local.
 
-</div>---
+</div><br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Vista general
+01 / DESCRIPCIÓN
 
-Este proyecto es un sistema de inventario diseñado para ejecutarse directamente desde la terminal.
+Este proyecto nace como una implementación práctica de un sistema de inventario utilizando únicamente Python y su biblioteca estándar.
 
-La aplicación permite crear productos, consultar información, modificar registros, eliminar productos, aumentar el stock y registrar ventas.
+La aplicación funciona directamente desde la terminal y utiliza archivos ".csv" para conservar los datos, evitando depender de una base de datos externa.
 
-El proyecto utiliza archivos ".csv" para almacenar la información, evitando la necesidad de una base de datos externa.
-
-              SISTEMA DE INVENTARIO
-                       |
-          +------------+------------+
-          |            |            |
-       PRODUCTOS     STOCK        VENTAS
-          |            |            |
-      Crear / Ver   Añadir      Registrar
-      Buscar        cantidad    venta
-      Editar                    |
-      Eliminar                  v
-                              REPORTE
-
----
-
-Funcionalidades
-
-Gestión de productos
-
-- Añadir nuevos productos.
-- Asignar un ID único.
-- Registrar nombre.
-- Registrar precio de compra.
-- Registrar precio de venta.
-- Registrar stock inicial.
-- Mostrar todos los productos.
-- Buscar productos mediante su ID.
-- Actualizar información existente.
-- Eliminar productos.
-
-Control de inventario
-
-El sistema permite incrementar el stock de un producto existente.
-
-Stock actual
-     |
-     v
-   25 unidades
-     |
-     + 10 ingresadas
-     |
-     v
-   35 unidades
-
-Registro de ventas
-
-Al realizar una venta:
-
-1. Se busca el producto mediante su ID.
-2. Se solicita la cantidad.
-3. Se comprueba el stock disponible.
-4. Se descuenta la cantidad vendida.
-5. Se registra la operación en el archivo de ventas.
+                         SISTEMA DE INVENTARIO
+                                  │
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+          PRODUCTOS             STOCK              VENTAS
+              │                   │                   │
+        ┌─────┼─────┐             │             ┌─────┴─────┐
+        │     │     │             │             │           │
+      Crear  Ver  Editar       Añadir        Registrar   Reportar
+        │     │     │          cantidad          │
+        └─────┼─────┘             │             │
+              │                   └──────┬──────┘
+              │                          │
+              └──────────────────────────┘
+                         │
+                         ▼
+                       CSV
 
 ---
 
-Menú
+02 / FUNCIONALIDADES
 
-La aplicación cuenta con un menú interactivo desde la terminal:
+GESTIÓN DE PRODUCTOS
 
-===============              MENU               ===============
+<table>
+<tr>
+<td width="50%">Crear
 
-1.- Añadir producto.
-2.- Mostrar productos (Tabla).
-3.- Buscar producto por (id).
-4.- Actualizar producto (Sub menu).
-5.- Eliminar producto.
-6.- Añadir stock.
-7.- Venta producto.
-8.- Salir.
+- Registrar productos
+- Generar ID único
+- Definir nombre
+- Establecer precio de compra
+- Establecer precio de venta
+- Definir stock inicial
 
-===============================================================
+</td>
+<td width="50%">Administrar
+
+- Mostrar inventario
+- Buscar por ID
+- Actualizar información
+- Eliminar productos
+- Consultar existencias
+
+</td>
+</tr>
+</table><br>CONTROL DE INVENTARIO
+
+El stock puede incrementarse directamente desde el menú:
+
+                    STOCK ACTUAL
+
+                         25
+                          │
+                          │
+                       + 10
+                          │
+                          ▼
+                         35
+
+                   unidades disponibles
+
+El sistema actualiza la cantidad almacenada del producto.
+
+<br>REGISTRO DE VENTAS
+
+Una venta sigue un proceso de validación antes de modificar el inventario:
+
+                         PRODUCTO
+                             │
+                             ▼
+                       BUSCAR POR ID
+                             │
+                             ▼
+                     ¿PRODUCTO EXISTE?
+                       ╱           ╲
+                     NO             SÍ
+                     │               │
+                     ▼               ▼
+                   ERROR        SOLICITAR
+                                CANTIDAD
+                                    │
+                                    ▼
+                              COMPROBAR STOCK
+                               ╱           ╲
+                             NO             SÍ
+                             │               │
+                             ▼               ▼
+                           ERROR       DESCONTAR STOCK
+                                             │
+                                             ▼
+                                      REGISTRAR VENTA
+
+---
+
+03 / MENÚ
+
+La aplicación cuenta con un menú interactivo ejecutado directamente desde la terminal.
+
+╭──────────────────────────────────────────────────╮
+│                                                  │
+│              SISTEMA DE INVENTARIO               │
+│                                                  │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  01    Añadir producto                           │
+│  02    Mostrar productos                         │
+│  03    Buscar producto por ID                    │
+│  04    Actualizar producto                       │
+│  05    Eliminar producto                         │
+│  06    Añadir stock                              │
+│  07    Registrar venta                           │
+│  08    Salir                                     │
+│                                                  │
+╰──────────────────────────────────────────────────╯
 
 La interfaz utiliza colores ANSI para diferenciar información, advertencias, errores y datos del inventario.
 
 ---
 
-Estructura de datos
+04 / ESTRUCTURA DE DATOS
 
 Los productos se almacenan en:
 
 data.csv
 
-Cada producto contiene:
+Formato:
 
 id,nombre,p_compra,p_venta,stock
 
@@ -111,88 +154,67 @@ Ejemplo:
 2,Mouse_Gamer,40,70,20
 3,Auriculares,60,95,10
 
-Las operaciones de venta se registran en:
+Las operaciones de venta se almacenan en:
 
 reporte_venta.csv
 
+De esta forma, el proyecto mantiene separados los datos del inventario y el historial de ventas.
+
 ---
 
-Estructura del proyecto
+05 / ARQUITECTURA
 
 .
-├── modulo_constantes.py
 ├── main.py
+│
+│   ├── comprobando_existencia_de_archivos()
+│   ├── agregar_producto()
+│   ├── mostrar_productos()
+│   ├── mostrar_producto_id()
+│   ├── actulizar_producto()
+│   ├── eliminar_producto()
+│   ├── añadir_stock()
+│   ├── venta_de_producto()
+│   └── generar_reporte()
+│
+├── modulo_constantes.py
+│
+│   ├── Colores ANSI
+│   ├── Negrita
+│   ├── Reset
+│   ├── Banner
+│   └── Menús
+│
 ├── data.csv
 ├── reporte_venta.csv
 └── README.md
 
 "main.py"
 
-Contiene la lógica principal del sistema:
-
-comprobando_existencia_de_archivos()
-        |
-        +-- Verificación de archivos
-
-agregar_producto()
-        |
-        +-- Creación de productos
-
-mostrar_productos()
-        |
-        +-- Visualización del inventario
-
-mostrar_producto_id()
-        |
-        +-- Búsqueda por ID
-
-actulizar_producto()
-        |
-        +-- Modificación de productos
-
-eliminar_producto()
-        |
-        +-- Eliminación
-
-añadir_stock()
-        |
-        +-- Incremento de inventario
-
-venta_de_producto()
-        |
-        +-- Registro de ventas
-
-generar_reporte()
-        |
-        +-- Reportes
+Contiene la lógica principal del sistema y las operaciones relacionadas con productos, inventario y ventas.
 
 "modulo_constantes.py"
 
-Contiene las constantes utilizadas para la interfaz de terminal:
+Centraliza los elementos visuales utilizados por la terminal.
 
-- Colores ANSI.
-- Negrita.
-- Reset de colores.
-- Banner principal.
-- Menús secundarios.
-
-Esto permite mantener separada la parte visual de la lógica del programa.
+Esto permite mantener separadas progresivamente la lógica y la presentación.
 
 ---
 
-Tecnologías utilizadas
+06 / TECNOLOGÍAS
 
-Python
+<div align="center"><img src="https://img.shields.io/badge/Python-B84DFF?style=for-the-badge&logo=python&logoColor=white"/><img src="https://img.shields.io/badge/CSV-00D9FF?style=for-the-badge"/><img src="https://img.shields.io/badge/Terminal-8A2BE2?style=for-the-badge"/></div><br>Python
 
-El proyecto está construido utilizando Python y diferentes herramientas de su biblioteca estándar.
+El proyecto utiliza Python y módulos de su biblioteca estándar:
 
 import csv
 import time
+
 from modulo_constantes import *
 
 CSV
 
-El módulo "csv" permite trabajar con los archivos de inventario utilizando:
+Los datos se gestionan mediante:
 
 csv.reader()
 csv.DictReader()
@@ -202,173 +224,172 @@ Esto permite trabajar tanto con filas como con registros representados mediante 
 
 ---
 
-Flujo de una venta
+07 / CONCEPTOS DE PROGRAMACIÓN
 
-                  ID DEL PRODUCTO
-                         |
-                         v
-                 Buscar producto
-                         |
-                         v
-                  ¿Existe el ID?
-                    /        \
-                  NO          SÍ
-                  |            |
-                  v            v
-               Error       Solicitar
-                           cantidad
-                              |
-                              v
-                       Comprobar stock
-                         /         \
-                       NO           SÍ
-                       |             |
-                       v             v
-                    Error       Descontar
-                                  stock
-                                    |
-                                    v
-                            Registrar venta
+┌──────────────────────────────┐
+│       ENTRADA / SALIDA       │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       CONDICIONALES          │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│           BUCLES             │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         FUNCIONES            │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│     MANEJO DE EXCEPCIONES    │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│      ARCHIVOS + CSV          │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│     LISTAS + DICCIONARIOS    │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│            CRUD              │
+└──────────────────────────────┘
+
+También se practican:
+
+- Lectura y escritura de archivos
+- Conversión de tipos
+- Validación de entradas
+- "FileNotFoundError"
+- "ValueError"
+- "KeyboardInterrupt"
+- Manipulación de listas
+- Manipulación de diccionarios
 
 ---
 
-Interfaz
+08 / INTERFAZ DE TERMINAL
 
-El proyecto intenta mantener una experiencia visual clara dentro de una terminal, utilizando una combinación de colores pastel y un banner ASCII.
+Una parte importante del proyecto es su identidad visual.
+
+La interfaz utiliza colores ANSI y un banner personalizado para diferenciar los distintos tipos de información mostrados al usuario.
 
 ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
 ████╗ ████║██╔════╝████╗  ██║██║   ██║
 ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
 ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
 ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
-╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═════╝
 
-La idea es que el programa no sea solamente funcional, sino que también tenga una identidad visual propia desde la terminal.
+La intención es que el sistema no sea solamente funcional, sino que tenga una experiencia visual propia desde la terminal.
 
 ---
 
-Instalación
+09 / INSTALACIÓN
 
-Clona el repositorio:
+Clonar
 
 git clone <URL_DEL_REPOSITORIO>
+
+Entrar al proyecto
+
 cd <NOMBRE_DEL_REPOSITORIO>
 
-No requiere instalar paquetes externos para utilizar las funcionalidades mostradas en el proyecto.
-
-Ejecuta:
+Ejecutar
 
 python main.py
 
-o, dependiendo de tu instalación:
+También:
 
 python3 main.py
 
+No se requieren paquetes externos para las funcionalidades actuales.
+
 ---
 
-Requisitos
+10 / REQUISITOS
 
 Python 3
-Terminal compatible con colores ANSI
+   │
+   ▼
+Terminal compatible con ANSI
+   │
+   ▼
+Sistema de archivos
+   │
+   ▼
+CSV como almacenamiento
 
-El sistema utiliza archivos locales ".csv", por lo que no necesita una base de datos para funcionar.
+El proyecto no requiere:
 
----
-
-Conceptos utilizados
-
-Este proyecto sirve como práctica de varios conceptos fundamentales de Python:
-
-Entrada / salida
-       |
-       v
-Condicionales
-       |
-       v
-Bucles
-       |
-       v
-Funciones
-       |
-       v
-Manejo de excepciones
-       |
-       v
-Archivos
-       |
-       v
-CSV
-       |
-       v
-Diccionarios
-       |
-       v
-CRUD
-
-También se trabaja con operaciones como:
-
-- Lectura y escritura de archivos.
-- "csv.reader".
-- "csv.DictReader".
-- "csv.DictWriter".
-- Listas.
-- Diccionarios.
-- Conversión de tipos.
-- Validación de entradas.
-- Manejo de "FileNotFoundError".
-- Manejo de "ValueError".
-- Manejo de "KeyboardInterrupt".
+- Base de datos externa
+- Framework
+- Librerías de terceros
+- Servidor
 
 ---
 
-Estado del proyecto
+11 / ESTADO
 
-[████████████████░░░░]  En desarrollo
+<div align="center"><img src="https://img.shields.io/badge/STATUS-EN%20DESARROLLO-B84DFF?style=for-the-badge"/><br><br>
 
-El sistema ya cuenta con las operaciones principales de inventario y se encuentra en proceso de mejora.
+████████████████░░░░   80%
+
+</div>Las operaciones principales del sistema ya están implementadas y el proyecto continúa en proceso de mejora.
 
 Próximas mejoras
 
-- Generación completa de reportes.
-- Validaciones más robustas.
-- Mejor manejo de errores.
-- Mejoras en la presentación de las tablas.
-- Validación de cantidades y precios.
-- Optimización de la estructura del código.
-- Separación progresiva entre lógica, datos e interfaz.
+[ ] Generación completa de reportes
+[ ] Validaciones más robustas
+[ ] Mejor manejo de errores
+[ ] Mejor presentación de tablas
+[ ] Validación de cantidades y precios
+[ ] Optimización de la estructura
+[ ] Separación entre lógica, datos e interfaz
 
 ---
 
-Objetivo
+12 / OBJETIVO
 
-El objetivo del proyecto es construir progresivamente un sistema de inventario funcional desde cero, utilizando Python y herramientas de su biblioteca estándar.
+El objetivo es construir progresivamente un sistema de inventario funcional utilizando Python desde cero.
 
-Más que depender de una interfaz gráfica o una base de datos externa, el proyecto parte de una aplicación sencilla de terminal y evoluciona incorporando nuevas funcionalidades.
+El proyecto parte de una aplicación de terminal sencilla y evoluciona incorporando nuevas funcionalidades mientras se refuerzan conceptos fundamentales de programación.
 
-         PYTHON
-            |
-            v
-       TERMINAL CLI
-            |
-            v
-        INVENTARIO
-            |
-       +----+----+
-       |         |
-      CSV       CRUD
-       |         |
-       +----+----+
-            |
-            v
-          VENTAS
-            |
-            v
-         REPORTES
+                       PYTHON
+                          │
+                          ▼
+                    TERMINAL CLI
+                          │
+                          ▼
+                     INVENTARIO
+                          │
+              ┌───────────┴───────────┐
+              │                       │
+              ▼                       ▼
+             CRUD                    CSV
+              │                       │
+              └───────────┬───────────┘
+                          │
+                          ▼
+                        VENTAS
+                          │
+                          ▼
+                       REPORTES
 
 ---
 
-<div align="center">Sistema de Inventario
+<div align="center"><br><img src="https://capsule-render.vercel.app/api?type=waving&color=0:00D9FF,50:B84DFF,100:8A2BE2&height=120&section=footer&animation=twinkling"/>SISTEMA DE INVENTARIO
 
-Desarrollado con Python desde la terminal.
+Python · Terminal · CSV
 
 </div>
