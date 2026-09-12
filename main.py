@@ -130,7 +130,7 @@ def mostrar_producto_id(id_producto:str):
 
 def actulizar_producto(id_modificar:str):
     # Definiendo columnas, son las keys de los diccionarios :D
-    columnas = ["id","nombre","p_compra","p_venta","stock"]
+    columnas = ["id","nombre","compra","venta","stock"]
     # Lista vacia a la q se añade el diccionario modificado y los demas diccionarios
     new_csv = []
     
@@ -145,9 +145,9 @@ def actulizar_producto(id_modificar:str):
                 if campo == 1:
                     i['nombre'] = input("Ingrese el nuevo nombre del producto: ").replace(" ","_")
                 elif campo == 2:
-                    i['p_compra'] = input("Ingrese el nuevo precio del producto: ").replace(" ","")
+                    i['compra'] = input("Ingrese el nuevo precio del producto: ").replace(" ","")
                 elif campo == 3:
-                    i['p_venta'] = input("Ingrese el nuevo precio del producto: ").replace(" ","")
+                    i['venta'] = input("Ingrese el nuevo precio del producto: ").replace(" ","")
                 elif campo == 4:
                     i["stock"] = input("Ingrese el nuevo stcko del producto: ").replace(" ","")
                 else:
@@ -163,7 +163,7 @@ def actulizar_producto(id_modificar:str):
 def eliminar_producto(id_eliminar):
     
     # Definiendo columnas, son las keys de los diccionarios :D
-    columnas = ["id","nombre","p_compra","p_venta","stock"]
+    columnas = ["id","nombre","compra","venta","stock"]
     # Lista vacia a la q se añade el diccionario modificado y los demas diccionarios
     new_csv = []
 
@@ -188,7 +188,7 @@ def eliminar_producto(id_eliminar):
 def añadir_stock(id_modificar:str):
 
     # Definiendo columnas, son las keys de los diccionarios :D
-    columnas = ["id","nombre","p_compra","p_venta","stock"]
+    columnas = ["id","nombre","compra","venta","stock"]
     # Lista vacia a la q se añade el diccionario modificado y los demas diccionarios
     new_csv = []
 
@@ -210,7 +210,7 @@ def añadir_stock(id_modificar:str):
 def venta_de_producto(id_venta:int):
     
     # Definiendo columnas, son las keys de los diccionarios :D
-    columnas = ["id","nombre","p_compra","p_venta","stock"]
+    columnas = ["id","nombre","compra","venta","stock"]
     # Lista vacia a la q se añade el diccionario modificado y los demas diccionarios
     new_csv = []
 
@@ -223,7 +223,7 @@ def venta_de_producto(id_venta:int):
                 if int(i["stock"]) > cantidad:
                     i["stock"] = str(int(i["stock"]) - cantidad)
                     with open("./reporte_venta.csv","a",encoding="utf-8") as arch:
-                        arch.write(f"{cantidad},{i['nombre']},{i['precio']}\n")
+                        arch.write(f"{cantidad},{i['nombre']},{i['venta']}\n")
                 else:
                     print(f"{ROJO_PASTEL}Ese numero excede la cantidad del stock...{RESET}")
             new_csv.append(i)
@@ -233,8 +233,24 @@ def venta_de_producto(id_venta:int):
         escritor = csv.DictWriter(arch,fieldnames=columnas)
         escritor.writeheader()
         escritor.writerows(new_csv)
+
+# Funcion para generar reporte
 def generar_reporte():
-    pass
+    sum_temp = 0
+    with open("./reporte_venta.csv",'r',encoding='utf-8') as arch:
+        csv_reader = csv.reader(arch)
+        with open("./reporte_venta.txt",'a',encoding='utf-8') as file:
+            file.write(f"\n{"#"*40}\nNUEVO REPORTE DE VENRTA:\ncantidad producto precio\n")
+            for i in csv_reader:
+                file.write(f"{" ".join(i)}\n")
+                sum_temp = (int(i[2]) *int(i[0]) ) + sum_temp
+            file.write(f"EL total vendido es de: {sum_temp}")
+    with open("./reporte_venta.csv",'w',encoding='utf-8') as f:
+        f.write("")
+    with open("./reporte_venta.txt",'r',encoding='utf-8') as a:
+        print(a.read())
+
+            
 # Menu colorido         
 def menu():
     while True:
@@ -248,7 +264,8 @@ def menu():
 5.- Eliminar producto.
 6.- Añadir stock.
 7.- Venta producto.
-8.- Salir.
+8.- Generar reporte (txt).
+9.- Salir.
 ===============================================================
         {RESET}''')
         # Manejo de excepción por si el valor no es el correcto 
@@ -269,6 +286,8 @@ def menu():
             elif opcion == 7:
                 venta_de_producto(input("Ingrese el id del producto: "))
             elif opcion == 8:
+                generar_reporte()
+            elif opcion == 9:
                 print(f"salida con exito{"\n"*2}{VERDE_MENTA}··················")
                 print(f"{VERDE_MENTA}··GRACIAS!!!!!!!··")
                 print(f"{VERDE_MENTA}··················{RESET}{"\n"*2}")
